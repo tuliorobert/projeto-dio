@@ -3,9 +3,12 @@ package Exceptions;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+
+import javax.swing.JOptionPane;
 
 public class ReadFile {
     public static void printFile(String fileName) throws IOException {
@@ -26,8 +29,16 @@ public class ReadFile {
         br.close();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String fileName = "MyText.txt";
-        printFile(fileName);
+        try {
+            printFile(fileName);
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Revise o arquivo que deseja imprimir!");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!");
+
+            e.printStackTrace();
+        }
     }
 }
